@@ -1,0 +1,44 @@
+﻿<Page x:Class="ApplicantManagement.Pages.SpecialitiesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ApplicantManagement.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SpecialitiesPage"
+      Loaded="Page_Loaded">
+
+    <Grid>
+        <ListView x:Name="LVSpecialities">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Image, TargetNullValue={StaticResource DefaultImage}}" Height="150" Width="200"/>
+                        <StackPanel>
+                        <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding PlaceNumber, StringFormat='Количество мест: {0}'}"/>
+                            <TextBlock>
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsBudgetForm}" Value="True">
+                                                <Setter Property="Text" Value="Бюджетная основа"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsBudgetForm}" Value="False">
+                                                <Setter Property="Text" Value="Коммерчаская основа"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBlock Text="{Binding FormOfEducation.Name, StringFormat='Форма обучения: {0}'}"/>
+                            <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding Exams, StringFormat='Вступительные экзамены: {0}'}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
